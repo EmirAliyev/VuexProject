@@ -1,20 +1,14 @@
 <template>
-  <div class="app">
-    <AllUsers :users="users" v-if="$store.getters.auth"></AllUsers>
-    <div class="wrapper" v-if="$store.getters.auth">
-      <div class="userPost" v-for="user in users" :key="user.id">
-        <div class="post-wrapper" v-for="(photo, i) in user.photo">
-          <div class="userName">
-            <img class="miniPhoto" :src="user.photo[0]" />
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ user.description.name }}
-            {{ user.description.surname }} - [{{ user.role }}]
-          </div>
-          <img :src="photo" class="bigPhoto" />
-          <LikeComment :getData="user, i"></LikeComment>
-        </div>
-      </div>
+ <div class="app">
+    <AllUsers :users="users" ></AllUsers>
+    <div class="wrapper">
+<div class="userPost"  v-for="photo,i in lenta">
+  <img  :src="photo">
+  <div>{{ nameSurname[i] }}</div> 
+  <LikeCommForPosts :i="i"></LikeCommForPosts>
+</div>
     </div>
-    <div class="else-block" v-else>
+    <div class="else-block" >
       <img src="@/assets/deny.jpg" class="denyPhoto" />
       <p>
         Доступ закрыт. Пожалуйста пройдите регистрацию или авторизуйтесь на
@@ -26,15 +20,20 @@
   </div>
 </template>
 
+<!-- <div class="userPost"  v-for="photo,i in lenta">
+  <img  :src="photo">
+  <div>{{ nameSurname[i] }}</div> 
+</div> -->
+
 <script>
 import { mapActions, mapGetters } from "vuex";
 import AllUsers from "@/components/AllUsers.vue";
-import LikeComment from "@/components/LikeComment.vue";
+import LikeCommForPosts from "@/components/LikeCommForPosts.vue";
 import OnePost from '@/components/OnePost.vue'
 export default {
   components: {
     AllUsers,
-    LikeComment,
+    LikeCommForPosts,
     OnePost
   },
   name: "AllPosts",
@@ -51,39 +50,8 @@ export default {
     this.loadLenta();
   },
   computed: {
-    ...mapGetters(["users",'lenta']),
-    photos() {
-      let photos = [];
-      this.users.forEach((user) => {
-        for (let link of user.photo) {
-          photos.push(link);
-        }
-      });
-      return photos;
-    },
-    likes() {
-      let likes = [];
-      this.users.forEach((user) => {
-        for (let like of user.likes) {
-          likes.push(like[0]);
-        }
-      });
-      return likes;
-    },
-    comments() {
-      let comments = [];
-      this.users.forEach((user) => {
-        for (let comment of user.comments) {
-          comments.push(comment.length);
-        }
-      });
-      return comments;
-    },
-  },
-  created() {
-    if (localStorage.getItem("token")) {
-      this.$store.commit("changeAuth");
-    }
+    ...mapGetters(["users",'lenta','nameSurname','allLikes']),
+
   },
 };
 </script>

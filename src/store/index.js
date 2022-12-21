@@ -26,7 +26,11 @@ export default new Vuex.Store({
     photoId:'',
     avatarMode:false,
     friendsMode:false,
-    lenta:[]
+    lenta:[],
+    nameSurname:[],
+    allLikes:[],
+    commentCounter:[],
+    likesID:[],
   },
   mutations: {
     changeSignMode(state) {
@@ -84,10 +88,37 @@ export default new Vuex.Store({
     },
     setLenta(state,response){
       state.lenta=[]
-      for ( let user of response){
-        state.lenta.push(user.photo)
-      }
-    }
+      state.nameSurname=[],
+      state.commentCounter=[],
+      state.likesID=[],
+      response.forEach(user=>{
+        for (let photo of user.photo){
+          state.lenta.unshift(photo)
+        }
+      })
+      response.forEach(user=>{
+        for(let i=0;i<user.photo.length;i++){
+          let info= `${user.description.name} ${user.description.surname}`
+          state.nameSurname.unshift(info)
+        }
+      })
+      response.forEach(user=>{
+        for (let likes of user.likes){
+          state.allLikes.unshift(likes)
+        }
+      })
+      response.forEach(user=>{
+        for (let comment of user.comments){
+          state.commentCounter.unshift(comment)
+        }
+      }),
+      response.forEach(user=>{
+        for(let i=0;i<user.photo.length;i++){
+          let info= user.id
+          state.likesID.unshift(info)
+        }
+      })
+    },
   },
   getters: {
     signShow(state) {
@@ -158,6 +189,18 @@ export default new Vuex.Store({
     },
     lenta(state){
       return state.lenta
+    },
+    nameSurname(state){
+      return state.nameSurname
+    },
+    allLikes(state){
+      return state.allLikes
+    },
+    commentCounter(state){
+      return state.commentCounter
+    },
+    likesID(state){
+      return state.ID
     }
   },
   actions: {
