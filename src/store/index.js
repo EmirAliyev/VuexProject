@@ -88,6 +88,7 @@ export default new Vuex.Store({
     },
     setLenta(state,response){
       state.lenta=[]
+      state.allLikes=[],
       state.nameSurname=[],
       state.commentCounter=[],
       state.likesID=[],

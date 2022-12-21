@@ -98,6 +98,9 @@ export default {
   },
   created() {
     this.$store.dispatch("loadData");
+    if(this.$store.getters.currentUser){
+      this.$store.state.auth=true
+    }
   },
   mounted() {
     this.$store.commit("currentUser", JSON.parse(localStorage.getItem("user")));
