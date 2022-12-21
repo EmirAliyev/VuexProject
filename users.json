@@ -1,0 +1,471 @@
+{
+  "allUsers": [
+    {
+      "id": 1,
+      "role": "admin",
+      "login": "Emir",
+      "token": "i44g1p4ktmgwnf9uuyy2gn",
+      "password": "qwerty123",
+      "description": {
+        "name": "Эмир",
+        "surname": "Алиев",
+        "age": "21",
+        "country": "Азербайджан",
+        "city": "Баку"
+      },
+      "study": "ADDA (АГМА)",
+      "avatar": "https://sun9-17.userapi.com/impg/D4VzfZOB7_ChcsoQ1PX_w7eSjNgjKfz0NR9yaA/V9yPbmlsGK8.jpg?size=897x1080&quality=96&sign=00b323beb19a1952fb614be17b1a87ec&type=album",
+      "photo": [
+        "https://sun9-39.userapi.com/impg/-RoIh1-dC6uxbRFqlb5Iq8QTDJCjdrfaq8X4QQ/yV49YX2m5mk.jpg?size=823x1029&quality=95&sign=d16960388127bc1f858c353146d61f14&type=album",
+        "https://sun9-5.userapi.com/impg/We_wVN7b_fLdBu7gb1c7j0MNSFyKKs3tt53joA/JmnCVgHuGgY.jpg?size=683x683&quality=95&sign=339e6f2370b185e963b45d915f1b6cec&type=album",
+        "https://sun9-17.userapi.com/impg/D4VzfZOB7_ChcsoQ1PX_w7eSjNgjKfz0NR9yaA/V9yPbmlsGK8.jpg?size=897x1080&quality=96&sign=00b323beb19a1952fb614be17b1a87ec&type=album",
+        "https://sun2-12.userapi.com/impg/QeiVZoopgLRtQ0UBx9zqS9VrgUM3QuSFNzYBqg/CXcw456dtpo.jpg?size=1009x1080&quality=96&sign=54da23c41ad0c664e052a8a585c33c18&type=album"
+      ],
+      "likes": [
+        [
+          29
+        ],
+        [
+          32
+        ],
+        [
+          19
+        ],
+        [
+          13
+        ]
+      ],
+      "likedBy": [
+        [
+          1
+        ],
+        [],
+        [],
+        []
+      ],
+      "comments": [
+        [],
+        [],
+        [],
+        []
+      ],
+      "mainPhotoId": 2,
+      "friends": [
+        [
+          "Рома Ткаченко",
+          "https://sun9-north.userapi.com/sun9-85/s/v1/ig2/qpCDcAYHxSrKho6pY0So-eV9txpGszMd_R9EgaW3WvJyy94ZHUlyShhV3SQIYJ-AQ4ZA_gsElF08TYZmNth19cE2.jpg?size=720x1080&quality=95&type=album",
+          "8",
+          "Uchiha"
+        ],
+        [
+          "Алина Муртазина",
+          "https://sun9-west.userapi.com/sun9-38/s/v1/if2/JsUlVQL6ZzCAewZLKkcEvSLHGCm6brwJac3KmxhCAFqaBk-iEC_oENcENUU43ufYo-gb2C_mFmdyd6mVls-ytA0V.jpg?size=810x1080&quality=96&type=album",
+          "10",
+          "Alina228"
+        ],
+        [
+          "Вадим Кувандыков",
+          "https://sun9-east.userapi.com/sun9-30/s/v1/ig2/F0uBxHTf0gCpcarW_mTZPB_IRA5kaB0bGQyICo_yg6XAnOIhEesCw2C3pRq9V6ZxznzL2sUQwJCer47ljBLU3YmB.jpg?size=481x481&quality=95&type=album",
+          "9",
+          "vadim99"
+        ],
+        [
+          "Марат Музафаров",
+          "https://sun9-west.userapi.com/sun9-62/s/v1/ig2/G4jZDrN_bmInc1pzn4BWI_iUE4pfiLaTf9MtTBU8lpMBpOYS28f_Dk_7cIg83AoFjwhAA5kuVAiJH8cOtMvqG-ke.jpg?size=720x1080&quality=95&type=album",
+          "7",
+          "Negrila"
+        ],
+        [
+          "Эдуард Коновалов",
+          "https://sun9-west.userapi.com/sun9-14/s/v1/ig2/ECFhrGnOP8V9tmGIUEAcdcabqzKJ8OWNJx3uQXUwXE1Y8DZN50PH5fxGovWsbVIIGA7ZuNrtJERsbkfnq7jGXcIo.jpg?size=810x1080&quality=96&type=album",
+          "6",
+          "killer2016"
+        ],
+        [
+          "Габиб Габибулаев",
+          "https://sun9-9.userapi.com/impg/TXThJKih6c8HnYLm8mDu_nISkfGxfJofZnJwJQ/czcEV6CvZKo.jpg?size=1080x1080&quality=96&sign=75716dc7fde2eaeb077e507fe8b8cf1f&type=album",
+          "5",
+          "Khabib"
+        ],
+        [
+          "Иван Левша",
+          "https://sun9-24.userapi.com/impg/JwqinMEfaDjQoZwj3Gh0E9Q06xu_n5854jAkIg/6oVq0Fb4HOE.jpg?size=927x1080&quality=95&sign=939744b2e16b0f40bee2dffb3b4c7a29&type=album",
+          "3",
+          "IvanLevsa"
+        ]
+      ]
+    },
+    {
+      "id": 2,
+      "role": "user",
+      "login": "Sulik",
+      "token": "5lsm213yndvaiap43w6j2b",
+      "password": "fds1234",
+      "description": {
+        "name": "Сулейман",
+        "surname": "Калимулин",
+        "age": "22",
+        "country": "Азербайджан",
+        "city": "Баку"
+      },
+      "study": "ADNSU (ADNA, бывш. АГНА, АзИНЕФТЕХИМ)",
+      "avatar": "https://sun9-45.userapi.com/impg/hS_aASGBC27BzXnXcMf4y1k7tjO2kTNa294vaQ/-lBkjh3U2LY.jpg?size=852x1080&quality=95&sign=99bccb9422a29af34ddb10c7c7926df7&type=album",
+      "photo": [
+        "https://sun9-45.userapi.com/impg/hS_aASGBC27BzXnXcMf4y1k7tjO2kTNa294vaQ/-lBkjh3U2LY.jpg?size=852x1080&quality=95&sign=99bccb9422a29af34ddb10c7c7926df7&type=album",
+        "https://sun9-83.userapi.com/impg/u_0TGeQO-hgj27WOMiS9NB33q7fPN1ZEsMCjnA/diJ_G0iZ0MA.jpg?size=798x1080&quality=96&sign=83247a29bed7406c2986818d9ba5aef2&type=album",
+        "https://sun9-3.userapi.com/impf/c847019/v847019681/142265/KYWmtDhGhrc.jpg?size=864x960&quality=96&sign=de8a1de697e3413f4ba1ca6c6f1a47bf&type=album"
+      ],
+      "likes": [
+        [
+          22
+        ],
+        [
+          13
+        ],
+        [
+          35
+        ]
+      ],
+      "likedBy": [
+        [],
+        [],
+        []
+      ],
+      "comments": [
+        [],
+        [],
+        []
+      ],
+      "mainPhotoId": 0,
+      "friends": [
+        [
+          "Эмир Алиев",
+          "https://sun9-39.userapi.com/impg/-RoIh1-dC6uxbRFqlb5Iq8QTDJCjdrfaq8X4QQ/yV49YX2m5mk.jpg?size=823x1029&quality=95&sign=d16960388127bc1f858c353146d61f14&type=album",
+          "1"
+        ]
+      ]
+    },
+    {
+      "id": 3,
+      "role": "user",
+      "login": "IvanLevsa",
+      "token": "3njss13yndvaiap43w6j2b",
+      "password": "431qу23",
+      "description": {
+        "name": "Иван",
+        "surname": "Левша",
+        "age": "21",
+        "country": "Азербайджан",
+        "city": "Баку"
+      },
+      "study": "ADDA (АГМА)",
+      "avatar": "https://sun9-24.userapi.com/impg/JwqinMEfaDjQoZwj3Gh0E9Q06xu_n5854jAkIg/6oVq0Fb4HOE.jpg?size=927x1080&quality=95&sign=939744b2e16b0f40bee2dffb3b4c7a29&type=album",
+      "photo": [
+        "https://sun9-30.userapi.com/impg/oryKUtlCOLifLpew-1x0oV_2paHbBjRWQmjoDA/C7z0Zs-y-L8.jpg?size=698x1080&quality=95&sign=1925982598331fe22defbd9565b2e76d&type=album",
+        "https://sun9-24.userapi.com/impg/JwqinMEfaDjQoZwj3Gh0E9Q06xu_n5854jAkIg/6oVq0Fb4HOE.jpg?size=927x1080&quality=95&sign=939744b2e16b0f40bee2dffb3b4c7a29&type=album",
+        "https://sun9-75.userapi.com/impg/TaY3dGF-BiZtuF80CW-eR7xFgAMNrQcJJ2xZ7w/17EW4OoSBPE.jpg?size=810x1080&quality=95&sign=b0a5895544b08c1e52800b15df45f3ca&type=album"
+      ],
+      "likes": [
+        [
+          21
+        ],
+        [
+          13
+        ],
+        [
+          35
+        ]
+      ],
+      "likedBy": [
+        [],
+        [],
+        []
+      ],
+      "comments": [
+        [],
+        [],
+        []
+      ],
+      "mainPhotoId": 1,
+      "friends": []
+    },
+    {
+      "id": 4,
+      "role": "user",
+      "password": "trq23q",
+      "login": "TimurA",
+      "token": "7bde24e6e8mpwy1va4z5u",
+      "description": {
+        "name": "Тимур",
+        "surname": "Абдулмуталибов",
+        "age": "23",
+        "country": "Азербайджан",
+        "city": "Баку"
+      },
+      "study": "ADNSU (ADNA, бывш. АГНА, АзИНЕФТЕХИМ)",
+      "avatar": "https://sun9-83.userapi.com/impg/n_hnM9pUXdprF-WcJqRm21x8P4IPnS9B_LUZZQ/WdgPrFwc4Ew.jpg?size=1280x1280&quality=96&sign=b7f45a8126b648a3d2f6dbb401e927fd&type=album",
+      "photo": [
+        "https://sun9-83.userapi.com/impg/n_hnM9pUXdprF-WcJqRm21x8P4IPnS9B_LUZZQ/WdgPrFwc4Ew.jpg?size=1280x1280&quality=96&sign=b7f45a8126b648a3d2f6dbb401e927fd&type=album",
+        "https://sun2-4.userapi.com/impg/1TAJrt-whsXdTPzmsWDEkYXP0FqYqwjNBq6Osg/dQWYK170mA0.jpg?size=811x1080&quality=96&sign=23a84591476ba6b183755fe5f81cc784&type=album",
+        "https://sun9-63.userapi.com/impf/c849324/v849324454/19d792/abBMqQffuqc.jpg?size=768x1024&quality=96&sign=73c2909b4b3ecf3dd11f9c9c11440305&type=album",
+        "https://sun9-28.userapi.com/impf/c851224/v851224240/15b335/9XZgRXsjoHg.jpg?size=960x638&quality=96&sign=8fcf2d39250d2a5efb61ecd03fa777e7&type=album"
+      ],
+      "likes": [
+        [
+          11
+        ],
+        [
+          21
+        ],
+        [
+          13
+        ],
+        [
+          35
+        ]
+      ],
+      "likedBy": [
+        [],
+        [],
+        [],
+        []
+      ],
+      "comments": [
+        [],
+        [],
+        [],
+        []
+      ],
+      "mainPhotoId": 0,
+      "friends": []
+    },
+    {
+      "id": 5,
+      "role": "user",
+      "login": "Khabib",
+      "password": "gafgr31",
+      "token": "fn9mirltmuaktg2c7mkavk",
+      "description": {
+        "name": "Габиб",
+        "surname": "Габибулаев",
+        "age": "21",
+        "country": "Азербайджан",
+        "city": "Баку"
+      },
+      "study": "ADDA (АГМА)",
+      "avatar": "https://sun9-9.userapi.com/impg/TXThJKih6c8HnYLm8mDu_nISkfGxfJofZnJwJQ/czcEV6CvZKo.jpg?size=1080x1080&quality=96&sign=75716dc7fde2eaeb077e507fe8b8cf1f&type=album",
+      "photo": [
+        "https://sun9-9.userapi.com/impg/TXThJKih6c8HnYLm8mDu_nISkfGxfJofZnJwJQ/czcEV6CvZKo.jpg?size=1080x1080&quality=96&sign=75716dc7fde2eaeb077e507fe8b8cf1f&type=album",
+        "https://sun9-59.userapi.com/impf/c850732/v850732503/1d43a1/NtP5ZBByU4g.jpg?size=640x640&quality=96&sign=209150990aa6c26271a8f8579ba2e513&type=album"
+      ],
+      "likes": [
+        [
+          21
+        ],
+        [
+          36
+        ]
+      ],
+      "likedBy": [
+        [],
+        []
+      ],
+      "comments": [
+        [],
+        []
+      ],
+      "mainPhotoId": 0,
+      "friends": []
+    },
+    {
+      "id": 6,
+      "role": "admin",
+      "login": "killer2016",
+      "password": "qwerty",
+      "token": "pjz5m8bu1gie0umjvbke",
+      "description": {
+        "name": "Эдуард",
+        "surname": "Коновалов",
+        "age": "22",
+        "country": "Россия",
+        "city": "Мелеуз"
+      },
+      "study": "УГНТУ",
+      "avatar": "https://sun9-west.userapi.com/sun9-14/s/v1/ig2/ECFhrGnOP8V9tmGIUEAcdcabqzKJ8OWNJx3uQXUwXE1Y8DZN50PH5fxGovWsbVIIGA7ZuNrtJERsbkfnq7jGXcIo.jpg?size=810x1080&quality=96&type=album",
+      "photo": [
+        "https://sun9-30.userapi.com/impg/48KECI_PO_Qn4tBPW6fLVBFJ-_JXV04c3aaGnQ/HjG5ZB_R-tA.jpg?size=1280x1920&quality=96&sign=63a97a21b610bf25e1fdb32e7bf0da16&type=album",
+        "https://sun9-west.userapi.com/sun9-14/s/v1/ig2/ECFhrGnOP8V9tmGIUEAcdcabqzKJ8OWNJx3uQXUwXE1Y8DZN50PH5fxGovWsbVIIGA7ZuNrtJERsbkfnq7jGXcIo.jpg?size=810x1080&quality=96&type=album"
+      ],
+      "likes": [
+        [
+          24
+        ],
+        [
+          41
+        ]
+      ],
+      "likedBy": [
+        [],
+        []
+      ],
+      "comments": [
+        [],
+        []
+      ],
+      "mainPhotoId": 1,
+      "friends": []
+    },
+    {
+      "id": 7,
+      "role": "user",
+      "login": "Negrila",
+      "password": "IloveShashliki",
+      "token": "1nngfwlu2w2nemrjbmpfp",
+      "description": {
+        "name": "Марат",
+        "surname": "Музафаров",
+        "age": "23",
+        "country": "Россия",
+        "city": "Уфа"
+      },
+      "study": "УГНТУ",
+      "avatar": "https://sun9-east.userapi.com/sun9-28/s/v1/if1/qa64UNNwalD_bNooMzgZ_iXVrGXGbw7zD6dq1UIXKSMFtBdcbfed4E6O-VekHcT3JFz-k2yP.jpg?size=608x1080&quality=96&type=album",
+      "photo": [
+        "https://sun9-west.userapi.com/sun9-62/s/v1/ig2/G4jZDrN_bmInc1pzn4BWI_iUE4pfiLaTf9MtTBU8lpMBpOYS28f_Dk_7cIg83AoFjwhAA5kuVAiJH8cOtMvqG-ke.jpg?size=720x1080&quality=95&type=album",
+        "https://sun9-east.userapi.com/sun9-28/s/v1/if1/qa64UNNwalD_bNooMzgZ_iXVrGXGbw7zD6dq1UIXKSMFtBdcbfed4E6O-VekHcT3JFz-k2yP.jpg?size=608x1080&quality=96&type=album"
+      ],
+      "likes": [
+        [
+          69
+        ],
+        [
+          43
+        ]
+      ],
+      "likedBy": [
+        [],
+        []
+      ],
+      "comments": [
+        [],
+        []
+      ],
+      "mainPhotoId": 0,
+      "friends": []
+    },
+    {
+      "id": 8,
+      "role": "user",
+      "login": "Uchiha",
+      "password": "sharingan",
+      "token": "67s7m1bo7be9sbtkjqj6h5",
+      "description": {
+        "name": "Рома",
+        "surname": "Ткаченко",
+        "age": "22",
+        "country": "Россия",
+        "city": "Казань"
+      },
+      "study": "УГАТУ",
+      "avatar": "https://sun9-north.userapi.com/sun9-85/s/v1/ig2/qpCDcAYHxSrKho6pY0So-eV9txpGszMd_R9EgaW3WvJyy94ZHUlyShhV3SQIYJ-AQ4ZA_gsElF08TYZmNth19cE2.jpg?size=720x1080&quality=95&type=album",
+      "photo": [
+        "https://sun9-north.userapi.com/sun9-86/s/v1/ig2/FIQrdVXgZdzmYmnfb9dEm9fHjt989XYKExWobUY_iFoSLOzU8en0Qd68GuTN2CWnHfAsn1YIRkVQjwCz9RRDZ1AM.jpg?size=1080x810&quality=96&type=album",
+        "https://sun9-north.userapi.com/sun9-85/s/v1/ig2/qpCDcAYHxSrKho6pY0So-eV9txpGszMd_R9EgaW3WvJyy94ZHUlyShhV3SQIYJ-AQ4ZA_gsElF08TYZmNth19cE2.jpg?size=720x1080&quality=95&type=album"
+      ],
+      "likes": [
+        [
+          23
+        ],
+        [
+          32
+        ]
+      ],
+      "likedBy": [
+        [],
+        []
+      ],
+      "comments": [
+        [],
+        []
+      ],
+      "mainPhotoId": 1,
+      "friends": []
+    },
+    {
+      "id": 9,
+      "role": "user",
+      "login": "vadim99",
+      "password": "jcnhjdcjrhjdbo",
+      "token": "7s7v9ztr0h50b9955cy4sim",
+      "description": {
+        "name": "Вадим",
+        "surname": "Кувандыков",
+        "age": "23",
+        "country": "Россия",
+        "city": "Казань"
+      },
+      "study": "УГАТУ",
+      "avatar": "https://sun9-east.userapi.com/sun9-30/s/v1/ig2/F0uBxHTf0gCpcarW_mTZPB_IRA5kaB0bGQyICo_yg6XAnOIhEesCw2C3pRq9V6ZxznzL2sUQwJCer47ljBLU3YmB.jpg?size=481x481&quality=95&type=album",
+      "photo": [
+        "https://sun9-east.userapi.com/sun9-30/s/v1/ig2/F0uBxHTf0gCpcarW_mTZPB_IRA5kaB0bGQyICo_yg6XAnOIhEesCw2C3pRq9V6ZxznzL2sUQwJCer47ljBLU3YmB.jpg?size=481x481&quality=95&type=album",
+        "https://sun9-north.userapi.com/sun9-77/s/v1/ig2/U8j-lkJS2GHxB6Ug5N2z377rsHYRmPVTZ6q4rI9HIUtFfCDI2R32LkU0OiGN1f3j41Ng47oGL6PJJ_bvEGvksvBE.jpg?size=1280x719&quality=96&type=album"
+      ],
+      "likes": [
+        [
+          30
+        ],
+        [
+          12
+        ]
+      ],
+      "likedBy": [
+        [],
+        []
+      ],
+      "comments": [
+        [],
+        []
+      ],
+      "mainPhotoId": 0,
+      "friends": []
+    },
+    {
+      "id": 10,
+      "role": "user",
+      "login": "Alina228",
+      "password": "winx996",
+      "token": "5pjpvmeb05v0acsyvs0qkf",
+      "description": {
+        "name": "Алина",
+        "surname": "Муртазина",
+        "age": "22",
+        "country": "Россия",
+        "city": "Казань"
+      },
+      "study": "УГАТУ",
+      "avatar": "https://sun9-west.userapi.com/sun9-38/s/v1/if2/JsUlVQL6ZzCAewZLKkcEvSLHGCm6brwJac3KmxhCAFqaBk-iEC_oENcENUU43ufYo-gb2C_mFmdyd6mVls-ytA0V.jpg?size=810x1080&quality=96&type=album",
+      "photo": [
+        "https://sun9-west.userapi.com/sun9-50/s/v1/ig2/sKODzIXghMPdG7Pa_P0gRwB23UaS0qLStmu7xe2neZeWc5OoKPQcdw2kTcOlKfwj6LbKHHoKIbP2CmSiHpwLvK7e.jpg?size=810x1080&quality=96&type=album",
+        "https://sun9-west.userapi.com/sun9-38/s/v1/if2/JsUlVQL6ZzCAewZLKkcEvSLHGCm6brwJac3KmxhCAFqaBk-iEC_oENcENUU43ufYo-gb2C_mFmdyd6mVls-ytA0V.jpg?size=810x1080&quality=96&type=album"
+      ],
+      "likes": [
+        [
+          40
+        ],
+        [
+          45
+        ]
+      ],
+      "likedBy": [
+        [],
+        []
+      ],
+      "comments": [
+        [],
+        []
+      ],
+      "mainPhotoId": 1,
+      "friends": []
+    }
+  ]
+}
