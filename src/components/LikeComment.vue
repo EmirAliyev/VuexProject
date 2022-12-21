@@ -38,8 +38,6 @@ export default {
       let likedPhoto = this.getData.likedBy[this.i];
       let newLikes = this.getData.likes[this.i];
       let likesCount = this.getData.likes[this.i][0];
-      let checkId = this.getData.likedBy[this.i];
-      console.log(checkId.includes(this.$store.getters.currentUser.id))
       if (likedPhoto.includes(this.$store.getters.currentUser.id)) {
         newLikes.shift();
         likesCount--;
@@ -58,6 +56,7 @@ export default {
     },
   },
   computed: {
+    //Функция берет массив с айдишниками пользователей, которые лайкнули данный пост и проверяет нет ли там айди текущего пользователя
     checkLikes() {
       let checkId = this.getData.likedBy[this.i];
       return checkId.includes(this.$store.getters.currentUser.id)

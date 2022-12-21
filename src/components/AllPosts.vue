@@ -1,14 +1,14 @@
 <template>
- <div class="app">
-    <AllUsers :users="users" ></AllUsers>
-    <div class="wrapper">
-<div class="userPost"  v-for="photo,i in lenta">
-  <img  :src="photo">
-  <div>{{ nameSurname[i] }}</div> 
-  <LikeCommForPosts :i="i"></LikeCommForPosts>
-</div>
+  <div class="app">
+    <AllUsers :users="users" v-if="$store.getters.auth"></AllUsers>
+    <div class="wrapper" v-if="$store.getters.auth">
+      <div class="userPost" v-for="(photo, i) in lenta">
+        <img :src="photo" class="bigPhoto" />
+        <div>{{ nameSurname[i] }}</div>
+        <LikeCommForPosts :users="users" :i="i"></LikeCommForPosts>
+      </div>
     </div>
-    <div class="else-block" >
+    <div class="else-block" v-else>
       <img src="@/assets/deny.jpg" class="denyPhoto" />
       <p>
         Доступ закрыт. Пожалуйста пройдите регистрацию или авторизуйтесь на
@@ -19,28 +19,18 @@
     </div>
   </div>
 </template>
-
-<!-- <div class="userPost"  v-for="photo,i in lenta">
-  <img  :src="photo">
-  <div>{{ nameSurname[i] }}</div> 
-</div> -->
-
 <script>
 import { mapActions, mapGetters } from "vuex";
 import AllUsers from "@/components/AllUsers.vue";
 import LikeCommForPosts from "@/components/LikeCommForPosts.vue";
-import OnePost from '@/components/OnePost.vue'
 export default {
   components: {
     AllUsers,
     LikeCommForPosts,
-    OnePost
   },
   name: "AllPosts",
   data() {
-    return {
-      lentaMass: [],
-    };
+    return {};
   },
   methods: {
     ...mapActions(["loadData", "loadLenta"]),
@@ -50,8 +40,7 @@ export default {
     this.loadLenta();
   },
   computed: {
-    ...mapGetters(["users",'lenta','nameSurname','allLikes']),
-
+    ...mapGetters(["users", "lenta", "nameSurname", "allLikes"]),
   },
 };
 </script>
@@ -78,28 +67,6 @@ export default {
   height: 5rem;
   border-radius: 5rem;
 }
-.denyPhoto {
-  width: 50rem;
-}
-.post-wrapper {
-  width: 60rem;
-  border: 1px solid black;
-}
-.else-block {
-  background: white;
-  font-size: 24px;
-  font-family: "Open Sans-400";
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-  height: 89.3vh;
-  width: 100%;
-}
-.goHome {
-  color: rgb(10, 10, 221);
-  cursor: pointer;
-}
 .wrapper {
   width: 100rem;
   display: flex;
@@ -118,6 +85,6 @@ export default {
 }
 .bigPhoto {
   width: 60rem;
-  max-height: 70rem;
+  max-height: 80rem;
 }
 </style>

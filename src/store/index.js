@@ -113,9 +113,10 @@ export default new Vuex.Store({
         }
       }),
       response.forEach(user=>{
+        let index=0;
         for(let i=0;i<user.photo.length;i++){
           let info= user.id
-          state.likesID.unshift(info)
+          state.likesID.unshift([info,index++])
         }
       })
     },
@@ -200,7 +201,7 @@ export default new Vuex.Store({
       return state.commentCounter
     },
     likesID(state){
-      return state.ID
+      return state.likesID
     }
   },
   actions: {
