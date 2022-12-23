@@ -53,6 +53,7 @@ export default {
         likedBy: this.getData.likedBy,
         likes: this.getData.likes,
       });
+      await this.$store.dispatch("loadData");
     },
   },
   computed: {

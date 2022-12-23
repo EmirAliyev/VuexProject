@@ -194,7 +194,7 @@ export default {
   },
   methods: {
     openPhoto(photo, i) {
-      if(this.getData.photo.lent){
+      if(this.getData.photo.length){
         this.$store.state.photoLink = photo;
       this.$store.commit("IncreasePhoto");
       this.$store.state.photoId = i;

@@ -29,7 +29,7 @@ export default {
   components: {
     LikeComment,
     Comments,
-  },
+  }, 
   props: {
     getData: Object,
   },

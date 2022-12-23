@@ -17,7 +17,7 @@
     <div class="allComents">
       <div
         class="comment"
-        v-for="(comment, i) in getData.comments[newI]"
+        v-for="(comment, i) in getData.comments[newI] "
         :key="i"
       >
         <div class="userInfo" v-if="comment[1]">
@@ -48,10 +48,10 @@ export default {
     getData: Object,
   },
   data() {
-    return {
-      moment:moment,
+    return {  
       newComment: "",
       editCommentMode: false,
+      moment:moment 
     };
   },
   methods: {
@@ -60,11 +60,9 @@ export default {
       let id = this.getData.id;
       let user = await axios.get(`http://localhost:3000/allUsers/${id}`);
       let commentMass = await user.data.comments;
-      let date = new Date()
-      console.log(date.getFullYear)
-      let newCommentFromUser = [
+        let newCommentFromUser = [
         `${this.$store.getters.currentUser.description.name} ${this.$store.getters.currentUser.description.surname}`,
-        `${this.$store.getters.currentUser.avatar}`,
+        `${this.getData.avatar}`,
         `${this.newComment}`,
         this.moment().format('MMMM Do YYYY, h:mm:ss a')
       ];
@@ -72,8 +70,11 @@ export default {
       await axios.patch(`http://localhost:3000/allUsers/${id}`, {
         comments: commentMass,
       });
-      await this.$store.dispatch("loadData");
       this.newComment = "";
+      this.getData;
+      await this.$store.dispatch("loadData"); 
+      this.$store.commit('userInfo',this.$store.getters.users[id-1])
+      this.$store.dispatch('loadLenta')
     },
     //Получаем массив с комментариями, удаляем по ключу нужный коммент и отправляем обратно на сервер.
     async deleteComment(i) {
@@ -84,7 +85,9 @@ export default {
       await axios.patch(`http://localhost:3000/allUsers/${id}`, {
         comments: commentMass,
       });
-      await this.$store.dispatch("loadData");
+      await this.$store.dispatch("loadData");  
+      this.$store.commit('userInfo',this.$store.getters.users[id-1])
+      this.$store.dispatch('loadLenta')
     },
     editComment() {
       this.editCommentMode = !this.editCommentMode;

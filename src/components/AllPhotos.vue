@@ -1,9 +1,14 @@
 <template>
   <div class="wrapper" @click="$store.commit('changeAllPhotos')">
-    <OpenedPhoto v-if="$store.getters.IncreasePhoto" :getData="getData"></OpenedPhoto>
+    <OpenedPhoto
+      v-if="$store.getters.IncreasePhoto"
+      :getData="getData"
+    ></OpenedPhoto>
     <div class="photos__content" @click.stop>
-      <div class="title"><span>Выберите фотографию</span>
-      <hr></div>
+      <div class="title">
+        <span>Выберите фотографию</span>
+        <hr />
+      </div>
       <div class="photo_wrapper" v-for="photo in getData.photo">
         <img class="photo" :src="photo" @click="changePhoto(photo)" />
       </div>
@@ -13,26 +18,26 @@
 
 <script>
 import axios from "axios";
-import OpenedPhoto from "@/components/OpenedPhoto.vue"
+import OpenedPhoto from "@/components/OpenedPhoto.vue";
 export default {
   name: "AllPhotos",
   props: {
     getData: Object,
   },
-  components:{
-   OpenedPhoto
+  components: {
+    OpenedPhoto,
   },
   data() {
     return {};
   },
   methods: {
-    changePhoto(photo) {
-      if(this.$store.getters.avatarMode){
-        axios.patch(`http://localhost:3000/allUsers/${this.getData.id}`, {
-        "avatar" : photo,
-        "mainPhotoId": this.getData.photo.indexOf(photo)
-      });
-      window.location.reload();
+    async changePhoto(photo) {
+      if (this.$store.getters.avatarMode) {
+        await axios.patch(`http://localhost:3000/allUsers/${this.getData.id}`, {
+          avatar: photo,
+          mainPhotoId: this.getData.photo.indexOf(photo),
+        });
+        window.location.reload();
       } else {
         this.$store.commit("IncreasePhoto");
         this.$store.state.photoLink = photo;
@@ -61,7 +66,7 @@ export default {
   display: flex;
   flex-wrap: wrap;
   border-radius: 0.3rem;
-  padding: 0 1rem 1rem 1rem;  
+  padding: 0 1rem 1rem 1rem;
 }
 .photo {
   width: 15rem;
@@ -72,11 +77,11 @@ export default {
   border: 1px solid rgb(236, 201, 201);
   margin-right: 1rem;
 }
-.title{
+.title {
   font-size: 2.4rem;
-  display:flex;
+  display: flex;
   flex-direction: column;
-  width:100%;
+  width: 100%;
   height: 5rem;
   justify-content: space-around;
   text-align: center;

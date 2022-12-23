@@ -26,11 +26,8 @@ export default new Vuex.Store({
     photoId:'',
     avatarMode:false,
     friendsMode:false,
-    lenta:[],
     nameSurname:[],
-    allLikes:[],
-    commentCounter:[],
-    likesID:[],
+    userInfo:[],
   },
   mutations: {
     changeSignMode(state) {
@@ -87,40 +84,19 @@ export default new Vuex.Store({
       state.friendsMode=!state.friendsMode
     },
     setLenta(state,response){
-      state.lenta=[]
-      state.allLikes=[],
       state.nameSurname=[],
-      state.commentCounter=[],
-      state.likesID=[],
-      response.forEach(user=>{
-        for (let photo of user.photo){
-          state.lenta.unshift(photo)
-        }
-      })
-      response.forEach(user=>{
-        for(let i=0;i<user.photo.length;i++){
-          let info= `${user.description.name} ${user.description.surname}`
-          state.nameSurname.unshift(info)
-        }
-      })
-      response.forEach(user=>{
-        for (let likes of user.likes){
-          state.allLikes.unshift(likes)
-        }
-      })
-      response.forEach(user=>{
-        for (let comment of user.comments){
-          state.commentCounter.unshift(comment)
-        }
-      }),
       response.forEach(user=>{
         let index=0;
         for(let i=0;i<user.photo.length;i++){
-          let info= user.id
-          state.likesID.unshift([info,index++])
+          let id= user.id
+          let info= `${user.description.name} ${user.description.surname}`
+          state.nameSurname.push([user.photo[i] ,info, user.likes[i][0],id,index++,user.comments[i],user.avatar])
         }
       })
     },
+    userInfo(state,data){
+      state.userInfo=data
+    }
   },
   getters: {
     signShow(state) {
@@ -189,20 +165,11 @@ export default new Vuex.Store({
     friendsMode(state){
       return state.friendsMode
     },
-    lenta(state){
-      return state.lenta
-    },
     nameSurname(state){
       return state.nameSurname
     },
-    allLikes(state){
-      return state.allLikes
-    },
-    commentCounter(state){
-      return state.commentCounter
-    },
-    likesID(state){
-      return state.likesID
+    userInfo(state){
+      return state.userInfo
     }
   },
   actions: {

@@ -2,14 +2,11 @@
   <div class="like_comments_wrapper">
     <div class="likes">
       <img src="@/assets/heart.png" />&nbsp;
-      <span class="text">{{ allLikes[i][0] }}</span>
+      <span class="text">{{ nameSurname[i][2] }}</span>
     </div>
     <div class="comments">
-      <img
-        src="@/assets/comments.png"
-        @click="openPhoto(getData.photo[i], i)"
-      />&nbsp;&nbsp;
-      <span class="text_com">{{ commentCounter[i].length }}</span>
+      <img src="@/assets/comments.png" @click="openPhoto(i)" />&nbsp;&nbsp;
+      <span class="text_com">{{ nameSurname[i][5].length }}</span>
     </div>
     <button
       :style="{
@@ -32,16 +29,20 @@ export default {
   props: {
     i: Number,
     users: Array,
+    photo: String,
   },
   data() {
     return {};
   },
   methods: {
     ...mapActions(["loadData"]),
-    openPhoto(link, i) {
-      this.$store.state.photoLink = link;
+    openPhoto(i) {
+      let index = this.nameSurname[i][4];
+      let userInd = this.nameSurname[i][[3]] - 1;
+      this.$store.state.userInfo = this.users[userInd];
+      this.$store.state.photoLink = this.photo;
       this.$store.commit("IncreasePhoto");
-      this.$store.state.photoId = i;
+      this.$store.state.photoId = index;
     },
     async likePhoto() {
       //likesID это массив, первый элемент которого содержит id Usera, а второй index его фотографии
@@ -68,15 +69,14 @@ export default {
         likedBy: user[id - 1].likedBy,
         likes: user[id - 1].likes,
       });
-      this.$store.commit("setLenta",this.users);
+      this.$store.commit("setLenta", this.users);
     },
   },
   computed: {
-    ...mapGetters(["allLikes", "commentCounter", "likesID"]),
-        //Функция берет массив с айдишниками пользователей, которые лайкнули данный пост и проверяет нет ли там айди текущего пользователя
+    ...mapGetters(["nameSurname"]),
     checkLikes() {
-      let id = this.likesID[this.i][0];
-      let index = this.likesID[this.i][1];
+      let id = this.nameSurname[this.i][3];
+      let index = this.nameSurname[this.i][4];
       let checkId = this.users[id - 1].likedBy[index];
       return checkId.includes(this.$store.getters.currentUser.id);
     },
@@ -91,7 +91,7 @@ export default {
   align-items: center;
   position: relative;
   padding: 0.3rem 2rem 0rem 1rem;
-  background: rgb(238, 237, 237);
+  background: rgb(226, 222, 222);
   box-shadow: 0px 0px 0.1rem 0rem;
   border-radius: 0.3rem;
 }
