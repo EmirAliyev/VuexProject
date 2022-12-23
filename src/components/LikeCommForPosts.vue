@@ -2,11 +2,11 @@
   <div class="like_comments_wrapper">
     <div class="likes">
       <img src="@/assets/heart.png" />&nbsp;
-      <span class="text">{{ nameSurname[i][2] }}</span>
+      <span class="text">{{ postsData[i][2] }}</span>
     </div>
     <div class="comments">
       <img src="@/assets/comments.png" @click="openPhoto(i)" />&nbsp;&nbsp;
-      <span class="text_com">{{ nameSurname[i][5].length }}</span>
+      <span class="text_com">{{ postsData[i][5].length }}</span>
     </div>
     <button
       :style="{
@@ -30,6 +30,7 @@ export default {
     i: Number,
     users: Array,
     photo: String,
+    postsData:Array,
   },
   data() {
     return {};
@@ -46,8 +47,8 @@ export default {
     },
     async likePhoto() {
       //likesID это массив, первый элемент которого содержит id Usera, а второй index его фотографии
-      let id = this.likesID[this.i][0];
-      let index = this.likesID[this.i][1];
+      let id = this.nameSurname[this.i][3];
+      let index = this.nameSurname[this.i][4];
       //this[i] это номер итерации цикла с компонента AllPosts,чтобы мы понимали на какой именно фотографии происходят действия и какие лайки и комменты для него подбирать
       //из другого массива.
       let user = this.users;
@@ -69,7 +70,9 @@ export default {
         likedBy: user[id - 1].likedBy,
         likes: user[id - 1].likes,
       });
+      await this.$store.dispatch("loadData");
       this.$store.commit("setLenta", this.users);
+      
     },
   },
   computed: {

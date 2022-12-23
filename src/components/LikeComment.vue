@@ -54,6 +54,8 @@ export default {
         likes: this.getData.likes,
       });
       await this.$store.dispatch("loadData");
+      this.$store.commit("setLenta", this.$store.getters.users);
+
     },
   },
   computed: {

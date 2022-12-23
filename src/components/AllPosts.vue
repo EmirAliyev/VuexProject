@@ -3,13 +3,20 @@
     <div v-if="$store.getters.currentUser">
       <AllUsers :users="users"></AllUsers>
     <div class="lenta_wrapper">
-      <div class="userPost" v-for="item,i in nameSurname  ">
+      <div class="sort_block">
+<div class="title" @click="sortMode=!sortMode">Сортировать</div>
+      </div>
+      <div @click="sortByMin" class="selection" v-if="sortMode">Лайки &#129177</div>
+<div @click="sortByMax" class="selection" v-if="sortMode">Лайки &#129179	
+</div>
+<div @click="withoutSort" class="selection" v-if="sortMode">Без сортировки</div>
+      <div class="userPost" v-for="item,i in postsData  ">
         <div class="userName">
           <img class="miniPhoto" :src="item[6]" />
           <div class="about">{{ item[1] }}</div>
         </div>
         <img @click="openPhoto(item,i)" :src="item[0]" class="bigPhoto" />
-        <LikeCommForPosts :photo="item[0]" :users="users" :i="i"></LikeCommForPosts>
+        <LikeCommForPosts :postsData="postsData" :photo="item[0]" :users="users" :i="i" ></LikeCommForPosts>
       </div>
     </div>
     <OpenedPhoto
@@ -43,6 +50,10 @@ export default {
   name: "AllPosts",
   data() {
     return {
+      standart:true,
+      maxLikes:false,
+      minLikes:false,
+      sortMode:false,
     };
   },
   methods: {
@@ -55,6 +66,35 @@ export default {
       this.$store.commit("IncreasePhoto");
       this.$store.state.photoId = photoIndex;
     },
+    sortMass(){
+      this.loadLenta();
+      let newMass=this.nameSurname
+      for (let i=0;i<newMass.length;i++){
+          for (let j=0;j<newMass.length-1;j++)
+            if(newMass[j][2]>newMass[j+1][2]){
+            let temp=newMass[j];
+            newMass[j]=newMass[j+1]
+            newMass[j+1]=temp
+          }
+        }
+        return newMass
+    },
+     withoutSort(){
+      this.standart=true,
+      this.maxLikes=false,
+      this.minLikes=false
+  
+    },
+    sortByMax(){
+      this.standart=false,
+      this.maxLikes=true,
+      this.minLikes=false
+    },
+    sortByMin(){
+      this.standart=false,
+      this.maxLikes=false,
+      this.minLikes=true
+    }
   },
   mounted() {
     this.loadData();
@@ -62,6 +102,16 @@ export default {
   },
   computed: {
     ...mapGetters(["users", "nameSurname",]),
+    postsData(){
+      if(this.standart){
+        return this.nameSurname
+      } else if(this.minLikes){
+         return this.sortMass()
+      } else {
+        return this.sortMass().reverse()
+      }
+
+    }
   },
 };
 </script>
@@ -83,8 +133,51 @@ export default {
   align-items:center;
   padding-bottom: 2rem;
 }
+.sort_block{
+  max-height: 30rem;
+  min-height: 4rem;
+  flex-direction: column;
+  display: flex;
+  font-size: 2rem;
+margin: auto;
+margin-top: 2rem;
+background:rgb(48, 47, 47);
+  width: 20rem;
+  border-radius:0.3rem;
+  justify-content:center;
+  color:white;
+  box-shadow:0rem 0rem 0.2rem 0.1rem;
+  cursor:pointer;
+}
+.selection{
+  max-height: 15rem;
+  min-height: 4rem;
+  width: 20rem;
+  border-radius:0.3rem;
+  margin: auto;
+  cursor:pointer;
+  font-size: 2rem;
+  display: flex;
+  justify-content:center;
+  align-items:center;
+  background:rgb(48, 47, 47);
+  border-top: 0.1rem solid black;
+  color:white;
+  box-shadow:0rem 0rem 0.2rem 0.1rem
+}
+.sort_block:hover{
+  background:rgb(214, 211, 211);
+  color:black;
+  transform: scale(1.05);
+}
+.selection:hover{
+  background:rgb(214, 211, 211);
+  color:black;
+  transform: scale(1.05);
+}
 .about{
   margin-left: 1rem;
+  
 }
 .userName {
   display: flex;
@@ -128,6 +221,8 @@ margin: 2rem 0;
   text-align: center;
   background: white;
 padding-bottom: 2rem;
+flex-direction: column;
+
 }
 .app {
   display: flex;

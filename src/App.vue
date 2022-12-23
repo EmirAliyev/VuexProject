@@ -45,7 +45,7 @@
         :key="user.id"
         @click="visitUser(user)"
       >
-        <img class="miniPhoto" :src="user.photo[0]" />
+        <img class="miniPhoto" :src="user.avatar" />
         {{ user.description.name }} {{ user.description.surname }} -
         {{ user.role }}
       </div>
