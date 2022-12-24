@@ -4,17 +4,17 @@
     @keydown.left="goLeft"
     @keydown.right="goRight"
     class="wrapper"
-    @click="$store.commit('IncreasePhoto')"
+    @click="IncreasePhoto_f"
   >
     <div class="content__block" @click.stop>
-      <img :src="$store.getters.photoLink" class="photo" />
+      <img :src="photoLink" class="photo" />
       <LikeComment
         class="likeComments"
         :getData="getData"
-        :i="this.$store.getters.photoId"
+        :i="photoId"
       ></LikeComment>
       <Comments
-        :newI="this.$store.getters.photoId"
+        :newI="photoId"
         :getData="getData"
       ></Comments>
     </div>
@@ -22,6 +22,7 @@
 </template>
 
 <script>
+import { mapGetters,mapMutations } from "vuex";
 import LikeComment from "@/components/LikeComment.vue";
 import Comments from "@/components/Comments.vue";
 export default {
@@ -37,36 +38,40 @@ export default {
     return {};
   },
   methods: {
+...mapMutations(['IncreasePhoto_f']),
     goLeft() {
       //Если мы открыли первую фотку с айди 0, то следующий раз когда мы нажмем "влево"
-      if (this.$store.getters.photoId == 0) {
+      if (this.photoId == 0) {
         //получим айди последней фотки в массиве
         this.$store.state.photoId = this.getData.photo.length - 1;
         //найдем эту фотку в массиве и присвоим ссылку переменной в src
         this.$store.state.photoLink =
-          this.getData.photo[this.$store.getters.photoId];
+          this.getData.photo[this.photoId];
       } else {
         this.$store.state.photoLink =
-          this.getData.photo[this.$store.getters.photoId - 1];
-        this.$store.state.photoId = this.$store.getters.photoId - 1;
+          this.getData.photo[this.photoId - 1];
+        this.$store.state.photoId = this.photoId - 1;
       }
     },
     goRight() {
       //Принцип тот же
-      if (this.$store.getters.photoId == this.getData.photo.length - 1) {
+      if (this.photoId == this.getData.photo.length - 1) {
         this.$store.state.photoId = 0;
         this.$store.state.photoLink =
-          this.getData.photo[this.$store.getters.photoId];
+          this.getData.photo[this.photoId];
       } else {
         this.$store.state.photoLink =
-          this.getData.photo[this.$store.getters.photoId + 1];
-        this.$store.state.photoId = this.$store.getters.photoId + 1;
+          this.getData.photo[this.photoId + 1];
+        this.$store.state.photoId = this.photoId + 1;
       }
     },
   },
   mounted() {
     document.querySelector(".wrapper").focus();
   },
+  computed:{
+    ...mapGetters(['photoId','photoLink'])
+  }
 };
 </script>
 

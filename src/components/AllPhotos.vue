@@ -1,7 +1,7 @@
 <template>
-  <div class="wrapper" @click="$store.commit('changeAllPhotos')">
+  <div class="wrapper" @click="changeAllPhotos_f">
     <OpenedPhoto
-      v-if="$store.getters.IncreasePhoto"
+      v-if="IncreasePhoto"
       :getData="getData"
     ></OpenedPhoto>
     <div class="photos__content" @click.stop>
@@ -17,6 +17,7 @@
 </template>
 
 <script>
+import { mapActions, mapGetters, mapMutations,mapState } from "vuex";
 import axios from "axios";
 import OpenedPhoto from "@/components/OpenedPhoto.vue";
 export default {
@@ -31,19 +32,25 @@ export default {
     return {};
   },
   methods: {
+    ...mapMutations(['IncreasePhoto_f','changeAllPhotos_f']),
+
     async changePhoto(photo) {
-      if (this.$store.getters.avatarMode) {
+      if (this.avatarMode) {
         await axios.patch(`http://localhost:3000/allUsers/${this.getData.id}`, {
           avatar: photo,
           mainPhotoId: this.getData.photo.indexOf(photo),
         });
         window.location.reload();
       } else {
-        this.$store.commit("IncreasePhoto");
-        this.$store.state.photoLink = photo;
+        this.IncreasePhoto_f()
+        this.photoLink = photo;
       }
     },
   },
+  computed:{
+    ...mapState(['photoLink']),
+    ...mapGetters(['avatarMode','IncreasePhoto'])
+  }
 };
 </script>
 

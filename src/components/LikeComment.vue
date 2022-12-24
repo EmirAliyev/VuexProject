@@ -17,6 +17,7 @@
 </template>
 <script>
 import axios from "axios";
+import { mapMutations,mapGetters, mapActions, } from "vuex";
 export default {
   name: "LikeComment",
   props: {
@@ -28,6 +29,8 @@ export default {
     };
   },
   methods: {
+    ...mapMutations(['setLenta']),
+    ...mapActions(['loadData']),
     openPhoto(link, i) {
       this.$store.state.photoLink = link;
       this.$store.commit("IncreasePhoto");
@@ -38,31 +41,32 @@ export default {
       let likedPhoto = this.getData.likedBy[this.i];
       let newLikes = this.getData.likes[this.i];
       let likesCount = this.getData.likes[this.i][0];
-      if (likedPhoto.includes(this.$store.getters.currentUser.id)) {
+      if (likedPhoto.includes(this.currentUser.id)) {
         newLikes.shift();
         likesCount--;
-        likedPhoto.shift(this.$store.getters.currentUser.id);
+        likedPhoto.shift(this.currentUser.id);
         newLikes.unshift(likesCount);
       } else {
         newLikes.shift();
         likesCount++;
         newLikes.unshift(likesCount);
-        likedPhoto.unshift(this.$store.getters.currentUser.id);
+        likedPhoto.unshift(this.currentUser.id);
       }
       await axios.patch(`http://localhost:3000/allUsers/${id}`, {
         likedBy: this.getData.likedBy,
         likes: this.getData.likes,
       });
-      await this.$store.dispatch("loadData");
-      this.$store.commit("setLenta", this.$store.getters.users);
+      await this.loadData();
+      this.setLenta(this.users);
 
     },
   },
   computed: {
+    ...mapGetters(['currentUser','users']),
     //Функция берет массив с айдишниками пользователей, которые лайкнули данный пост и проверяет нет ли там айди текущего пользователя
     checkLikes() {
       let checkId = this.getData.likedBy[this.i];
-      return checkId.includes(this.$store.getters.currentUser.id)
+      return checkId.includes(this.currentUser.id)
     },
   },
 };

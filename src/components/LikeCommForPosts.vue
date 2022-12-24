@@ -21,8 +21,7 @@
   </div>
 </template>
 <script>
-import { mapGetters } from "vuex";
-import { mapActions } from "vuex";
+import { mapGetters, mapMutations,mapActions } from "vuex";
 import axios from "axios";
 export default {
   name: "LikeCommForPosts",
@@ -37,12 +36,13 @@ export default {
   },
   methods: {
     ...mapActions(["loadData"]),
+    ...mapMutations(['setLenta','IncreasePhoto_f']),
     openPhoto(i) {
       let index = this.nameSurname[i][4];
       let userInd = this.nameSurname[i][[3]] - 1;
       this.$store.state.userInfo = this.users[userInd];
       this.$store.state.photoLink = this.photo;
-      this.$store.commit("IncreasePhoto");
+      this.IncreasePhoto_f()
       this.$store.state.photoId = index;
     },
     async likePhoto() {
@@ -55,33 +55,33 @@ export default {
       let likedPhoto = user[id - 1].likedBy[index];
       let newLikes = user[id - 1].likes[index];
       let likesCount = user[id - 1].likes[index][0];
-      if (likedPhoto.includes(this.$store.getters.currentUser.id)) {
+      if (likedPhoto.includes(this.currentUser.id)) {
         newLikes.shift();
         likesCount--;
-        likedPhoto.shift(this.$store.getters.currentUser.id);
+        likedPhoto.shift(this.currentUser.id);
         newLikes.unshift(likesCount);
       } else {
         newLikes.shift();
         likesCount++;
         newLikes.unshift(likesCount);
-        likedPhoto.unshift(this.$store.getters.currentUser.id);
+        likedPhoto.unshift(this.currentUser.id);
       }
       await axios.patch(`http://localhost:3000/allUsers/${id}`, {
         likedBy: user[id - 1].likedBy,
         likes: user[id - 1].likes,
       });
-      await this.$store.dispatch("loadData");
-      this.$store.commit("setLenta", this.users);
+      await this.loadData()
+      this.setLenta(this.users);
       
     },
   },
   computed: {
-    ...mapGetters(["nameSurname"]),
+    ...mapGetters(["nameSurname",'currentUser']),
     checkLikes() {
       let id = this.nameSurname[this.i][3];
       let index = this.nameSurname[this.i][4];
       let checkId = this.users[id - 1].likedBy[index];
-      return checkId.includes(this.$store.getters.currentUser.id);
+      return checkId.includes(this.currentUser.id);
     },
   },
 };

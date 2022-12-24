@@ -1,20 +1,20 @@
 <template>
   <div class="app" @click="standartPage">
     <AllUsers :users="users"></AllUsers>
-    <AllPhotos :getData="getData" v-if="$store.getters.allPhotos && getData.photo"></AllPhotos>
+    <AllPhotos :getData="getData" v-if="allPhotos && getData.photo"></AllPhotos>
     <Registration
-      v-if="$store.getters.editMode"
+      v-if="editMode"
       :getData="getData"
     ></Registration>
     <OpenedPhoto
-      v-if="$store.getters.IncreasePhoto && getData.photo"
+      v-if="IncreasePhoto && getData.photo"
       :getData="getData"
-      :i="$store.getters.photoId"
+      :i="photoId"
     ></OpenedPhoto>
     <div class="info-wrapper">
       <div
         v-if="
-          getData.token !== $store.getters.currentUser.token && !checkFriend
+          getData.token !== currentUser.token && !checkFriend
         "
         class="addUser"
         @click="addToMyFriends"
@@ -23,7 +23,7 @@
         <span>Добавить в друзья</span>
       </div>
       <div
-        v-if="getData.token !== $store.getters.currentUser.token && checkFriend"
+        v-if="getData.token !== currentUser.token && checkFriend"
         class="addUser"
         @click="removeFromMyFriends"
         :key="user.id"
@@ -34,8 +34,8 @@
       <div
         class="changeData"
         v-if="
-          $store.getters.currentUser.token == getData.token ||
-          $store.getters.currentUser.role == 'admin'
+         currentUser.token == getData.token ||
+         currentUser.role == 'admin'
         "
         @click="goEditMode"
         @click.stop
@@ -75,14 +75,14 @@
           <div
             class="userFriends desc"
             @click.stop
-            @click="$store.commit('friendsMode')"
+            @click="friendsMode_f"
           >
             <img class="icon" src="@//assets/group.png" />
             <span>Друзья</span>
           </div>
           <div
             class="userPhotos desc"
-            @click="$store.commit('changeAllPhotos')"
+            @click="changeAllPhotos_f"
           >
             <img class="icon" src="@//assets/photography.png" />
             <span>Все фото</span>
@@ -95,8 +95,8 @@
             class="addNewPhoto btn"
             type="button"
             v-if="
-              $store.getters.currentUser.role == 'admin' ||
-              getData.token == $store.getters.currentUser.token
+              currentUser.role == 'admin' ||
+              getData.token == currentUser.token
             "
             ><img class="icon" src="@/assets/add-image.png" />
             <span>Добавить фото</span></label
@@ -115,8 +115,8 @@
       </div>
       <div
         v-if="
-          $store.getters.currentUser.role == 'admin' ||
-          getData.token == $store.getters.currentUser.token
+          currentUser.role == 'admin' ||
+          getData.token == currentUser.token
         "
         class="changeMainPhoto btn"
         @click="changeMainPhoto"
@@ -160,11 +160,12 @@
         <hr />
       </div>
     </div>
-    <MyFriends v-if="$store.getters.friendsMode" :getData="getData"></MyFriends>
+    <MyFriends v-if="friendsMode" :getData="getData"></MyFriends>
   </div>
 </template>
 
 <script>
+import { mapActions,mapGetters,mapMutations } from "vuex";
 import axios from "axios";
 import AllUsers from "@/components/AllUsers.vue";
 import AllPhotos from "@/components/AllPhotos.vue";
@@ -193,22 +194,24 @@ export default {
     };
   },
   methods: {
+    ...mapMutations(['friendsMode_f','changeAllPhotos_f','IncreasePhoto_f','avatarMode_f','editMode_f','visitedUser_f']),
+    ...mapActions(['loadData']),
     openPhoto(photo, i) {
       if(this.getData.photo.length){
         this.$store.state.photoLink = photo;
-      this.$store.commit("IncreasePhoto");
+   this.IncreasePhoto_f()
       this.$store.state.photoId = i;
       }
 
     },
     changeMainPhoto() {
-      this.$store.commit("changeAllPhotos");
-      this.$store.commit("avatarMode");
+      this.changeAllPhotos_f()
+      this.avatarMode_f()
     },
     goEditMode() {
-      this.$store.commit("editMode");
+      this.editMode_f();
       this.$store.state.dialogMode = false;
-      this.$store.commit("visitedUser", this.getData);
+      this.visitedUser_f(this.getData)
     },
     async uploadImg(event) {
       if (
@@ -234,7 +237,7 @@ export default {
             avatar: `${reader.result}`
           });
           this.$store.state.mainPhotoId=0
-          this.$store.dispatch('loadData')
+          this.loadData()
         };
         //добавляем к новому фото свойства лайков и комментариев.  ЗАМЕТКА ДЛЯ СЕБЯ -------ЗДЕСЬ НАДО ПРОВЕРИТЬ, НУЖНО СОКРАТИТЬ! =====
         let user = await axios.get(`http://localhost:3000/allUsers/${id}`);
@@ -257,7 +260,7 @@ export default {
     },
     //Получаем с сервера массив с друзьями, закидываем туда нового друга и обратно отправляем. id нужен для проверки, чтобы не проверять весь массив
     async addToMyFriends() {
-      let id = this.$store.getters.currentUser.id;
+      let id = this.currentUser.id;
       let myFriends = await axios.get(`http://localhost:3000/allUsers/${id}`);
       let newFriend = [
         `${this.getData.description.name} ${this.getData.description.surname}`,
@@ -270,11 +273,11 @@ export default {
       await axios.patch(`http://localhost:3000/allUsers/${id}`, {
         friends: friendsMass,
       });
-      this.$store.dispatch("loadData");
+      this.loadData()
     },
     //Получаем с сервера массив с друзьми. Берем с массива пользователей, у которых айди не равен айдишнику удаляемого пользователя и закидываем в новый массив
     async removeFromMyFriends() {
-      let id = this.$store.getters.currentUser.id - 1;
+      let id = this.currentUser.id - 1;
       let friendsArr = this.users[id].friends;
       let newMass = [];
       friendsArr.filter((friend) => {
@@ -286,7 +289,7 @@ export default {
       await axios.patch(`http://localhost:3000/allUsers/${id + 1}`, {
         friends: newMass,
       });
-      this.$store.dispatch("loadData");
+      this.loadData()
     },
     standartPage() {
       this.$store.state.editMode = false;
@@ -294,6 +297,7 @@ export default {
     },
   },
   computed: {
+    ...mapGetters(['allPhotos','editMode','IncreasePhoto','photoId','currentUser','friendsMode']),
     getData() {
       this.users = this.$store.getters.users;
       const user = this.users.find(
@@ -302,13 +306,13 @@ export default {
       if (user) {
         return (this.user = user);
       } else {
-        return (this.user = this.$store.getters.currentUser);
+        return (this.user = this.currentUser);
       }
     },
     //Проверка на наличие пользователя у вас в друзьях
     checkFriend() {
       if (this.getData.friends) {
-        let id = this.$store.getters.currentUser.id - 1;
+        let id = this.currentUser.id - 1;
         let friendsMass = this.users[id].friends;
         return friendsMass.find((friend) => {
           return friend[2] == this.getData.id;

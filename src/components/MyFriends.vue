@@ -2,7 +2,7 @@
   <transition name="friendsAnimation"><div v-if="getData.friends.length>0" class="friends_wrapper scroll" @mouseup="scrolling" @mousemove="scrolling" @mouseout="scrolling">
     <div class="user_wrapper" v-for="user in getData.friends">
       <img @click="visitUser(user[3])" :src="user[1]" class="userImg"/>
-      <span>{{ user[0] }}</span>
+      <span @click="visitUser(user[3])">{{ user[0] }}</span>
     </div>
   </div>
   <div v-else class="friends_wrapper"><span class="warn">Список друзей пуст.</span></div>
@@ -10,15 +10,17 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex';
 export default {
   name: "MyFriends",
   props: {
     getData: Object,
   },
   methods:{
+    ...mapMutations(['friendsMode_f']),
     visitUser(user){
       this.$router.push({name:'userPage',params:{id:user}})
-        this.$store.commit('friendsMode')
+        this.friendsMode_f()
     },
     scrolling(){
       const block = document.querySelector('.scroll');
@@ -31,7 +33,7 @@ block.addEventListener('mousemove', (e) => {
   block.scrollTop = (t.scrollHeight - t.clientHeight) * yy;
 });
     }
-  }
+  },
 };
 </script>
 

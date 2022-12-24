@@ -3,7 +3,7 @@
     <nav class="navBar">
       <img
         src="@/assets/login-.png"
-        v-if="$store.getters.currentUser == null"
+        v-if="currentUser == null"
         @click="changeSignMode"
         type="button"
         class="logIn"
@@ -57,6 +57,7 @@
 <script>
 import Authorization from "./components/Authorization.vue";
 import Registration from "./components/Registration.vue";
+import { mapActions, mapGetters, mapMutations } from "vuex";
 export default {
   components: {
     Authorization,
@@ -69,45 +70,49 @@ export default {
     };
   },
   methods: {
+    ...mapMutations(['changeSignMode_f','cleanInputData_f','visitedUser_f','currentUser_f']),
+    ...mapActions(['loadData']),
     changeSignMode() {
-      this.$store.commit("changeSignMode");
+      this.changeSignMode_f()
       this.$store.state.login = "";
       this.$store.state.pass = "";
       this.$store.state.dialogMode = true;
     },
     leaveAccount() {
-      this.$store.commit("cleanInputData");
+      this.cleanInputData_f();
       this.$router.push({ name: "home" });
       localStorage.clear();
       this.$store.state.currentUser = null;
-      this.$state.dialogMode == true;
+      this.$store.state.dialogMode = true;
     },
+
     visitUser(user) {
       this.$router.push({ name: "userPage", params: { id: user.login } });
       this.inputValue = "";
-      this.$store.commit("visitedUser", user);
-      this.$store.commit("cleanInputData");
+      this.visitedUser_f(user);
+      this.cleanInputData_f();
     },
     goMyPage() {
       this.$router.push({
         name: "userPage",
-        params: { id: this.$store.getters.currentUser.login },
+        params: { id: this.currentUser.login },
       });
       this.$store.state.friendsMode = false;
     },
   },
   created() {
-    this.$store.dispatch("loadData");
-    if(this.$store.getters.currentUser){
+    this.loadData()
+    if(this.currentUser){
       this.$store.state.auth=true
     }
   },
   mounted() {
-    this.$store.commit("currentUser", JSON.parse(localStorage.getItem("user")));
+    this.currentUser_f(JSON.parse(localStorage.getItem("user")));
   },
   computed: {
+    ...mapGetters(['currentUser','users']),
     filteredUsers() {
-      return this.$store.getters.users.filter((user) => {
+      return this.users.filter((user) => {
         let name = user.description.name
           .toLowerCase()
           .includes(this.inputValue.toLowerCase());

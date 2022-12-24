@@ -1,7 +1,7 @@
 <template>
   <div>
-    <transition name="logIn" v-if="($store.getters.signShow && $store.getters.dialogMode)"><Authorization ></Authorization></transition>
-<transition name="newAcc" v-else-if="($store.getters.signShow && $store.getters.dialogMode===false)" > <Registration ></Registration></transition>
+    <transition name="logIn" v-if="(signShow && dialogMode)"><Authorization ></Authorization></transition>
+<transition name="newAcc" v-else-if="(signShow && dialogMode===false)" > <Registration ></Registration></transition>
 <div class="wrapper">
   <div class="title"><span class="spanText">Пройди простейшую регистрацию и начни заводить новые знакомства прямо сейчас!</span>
     <img class="titlePhoto" src="@/assets/test1.jpg">
@@ -10,7 +10,8 @@
   </div>
  </template>
  <script>
- import Authorization from './Authorization.vue';
+ import { mapGetters } from 'vuex';
+import Authorization from './Authorization.vue';
  import Registration from './Registration.vue';
  export default{
    components:{
@@ -24,6 +25,9 @@
     if(localStorage.getItem('user')){
       this.$router.push({name:'lenta'})
     }
+   },
+   computed:{
+    ...mapGetters(['signShow','dialogMode']),
    }
 
  }

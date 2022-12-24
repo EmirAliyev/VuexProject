@@ -41,6 +41,7 @@
 <script>
 import axios from "axios";
 let moment=require('moment')
+import { mapActions,mapMutations,mapGetters } from "vuex";
 export default {
   name: "Comments",
   props: {
@@ -55,26 +56,28 @@ export default {
     };
   },
   methods: {
+    ...mapMutations(['userInfo_f']),
+    ...mapActions(['loadData','loadLenta']),
     //Получаем массив с комментариями, добавляем новый коммент и отправляем обновленный массив обратно на сервер.
     async postNewComment() {
       let id = this.getData.id;
       let user = await axios.get(`http://localhost:3000/allUsers/${id}`);
       let commentMass = await user.data.comments;
         let newCommentFromUser = [
-        `${this.$store.getters.currentUser.description.name} ${this.$store.getters.currentUser.description.surname}`,
-        `${this.getData.avatar}`,
+        `${this.currentUser.description.name} ${this.currentUser.description.surname}`,
+        `${this.currentUser.avatar}`,
         `${this.newComment}`,
         this.moment().format('MMMM Do YYYY, h:mm:ss a')
       ];
-      commentMass[this.$store.getters.photoId].unshift(newCommentFromUser);
+      commentMass[this.photoId].unshift(newCommentFromUser);
       await axios.patch(`http://localhost:3000/allUsers/${id}`, {
         comments: commentMass,
       });
       this.newComment = "";
       this.getData;
-      await this.$store.dispatch("loadData"); 
-      this.$store.commit('userInfo',this.$store.getters.users[id-1])
-      this.$store.dispatch('loadLenta')
+      await this.loadData();
+      this.userInfo_f(this.users[id-1])
+      this.loadLenta()
     },
     //Получаем массив с комментариями, удаляем по ключу нужный коммент и отправляем обратно на сервер.
     async deleteComment(i) {
@@ -85,14 +88,17 @@ export default {
       await axios.patch(`http://localhost:3000/allUsers/${id}`, {
         comments: commentMass,
       });
-      await this.$store.dispatch("loadData");  
-      this.$store.commit('userInfo',this.$store.getters.users[id-1])
-      this.$store.dispatch('loadLenta')
+      await this.loadData() 
+      this.userInfo_f(this.users[id-1])
+      this.loadLenta()
     },
     editComment() {
       this.editCommentMode = !this.editCommentMode;
     },
   },
+  computed:{
+    ...mapGetters(['currentUser','photoId','users']),
+  }
 };
 </script>
 

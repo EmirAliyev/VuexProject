@@ -1,10 +1,10 @@
 <template>
   <div class="app">
-    <div v-if="$store.getters.currentUser">
+    <div v-if="currentUser">
       <AllUsers :users="users"></AllUsers>
     <div class="lenta_wrapper">
-      <div class="sort_block">
-<div class="title" @click="sortMode=!sortMode">Сортировать</div>
+      <div @click="sortMode=!sortMode" class="sort_block">
+<div class="title">Сортировать</div>
       </div>
       <div @click="sortByMin" class="selection" v-if="sortMode">Лайки &#129177</div>
 <div @click="sortByMax" class="selection" v-if="sortMode">Лайки &#129179	
@@ -12,17 +12,18 @@
 <div @click="withoutSort" class="selection" v-if="sortMode">Без сортировки</div>
       <div class="userPost" v-for="item,i in postsData  ">
         <div class="userName">
-          <img class="miniPhoto" :src="item[6]" />
-          <div class="about">{{ item[1] }}</div>
+          <img @click="visit(i)" class="miniPhoto" :src="item[6]" />
+          <div @click="visit(i)" class="about">{{ item[1] }}</div>
         </div>
         <img @click="openPhoto(item,i)" :src="item[0]" class="bigPhoto" />
         <LikeCommForPosts :postsData="postsData" :photo="item[0]" :users="users" :i="i" ></LikeCommForPosts>
       </div>
     </div>
     <OpenedPhoto
-      v-if="$store.getters.IncreasePhoto "
-      :getData="$store.getters.userInfo"
-      :i="$store.getters.photoId"
+      v-if="IncreasePhoto"
+      :getData="userInfo"
+      :i="photoId
+      "
     ></OpenedPhoto>
     </div>
     <div class="else-block" v-else>
@@ -37,7 +38,7 @@
   </div>
 </template>
 <script>
-import { mapActions, mapGetters } from "vuex";
+import { mapActions, mapGetters, mapMutations, mapState } from "vuex";
 import AllUsers from "@/components/AllUsers.vue";
 import LikeCommForPosts from "@/components/LikeCommForPosts.vue";
 import OpenedPhoto from "@/components/OpenedPhoto.vue";
@@ -58,14 +59,21 @@ export default {
   },
   methods: {
     ...mapActions(["loadData", "loadLenta"]),
+    ...mapMutations(['userInfo_f','visitedUser_f','IncreasePhoto_f']),
     openPhoto(photo, i) {
       let index= this.nameSurname[i][3] -1 ;
       let photoIndex= this.nameSurname[i][4]
-      this.$store.commit('userInfo',this.users[index])
-        this.$store.state.photoLink = photo[0];
-      this.$store.commit("IncreasePhoto");
+      this.userInfo_f(this.users[index])
+      this.$store.state.photoLink = photo[0];
+      this.IncreasePhoto_f()
       this.$store.state.photoId = photoIndex;
     },
+    visit(i){
+      let index= this.nameSurname[i][3] -1 ;
+      this.$router.push({name:'userPage', params:{id: this.users[index].login}})
+      this.visitedUser_f(this.users[index])
+      this.$store.statefriendsMode=false;
+   },
     sortMass(){
       this.loadLenta();
       let newMass=this.nameSurname
@@ -101,7 +109,7 @@ export default {
     this.loadLenta();
   },
   computed: {
-    ...mapGetters(["users", "nameSurname",]),
+    ...mapGetters(["users", "nameSurname",'photoId','currentUser','IncreasePhoto','userInfo']),
     postsData(){
       if(this.standart){
         return this.nameSurname
@@ -177,7 +185,7 @@ background:rgb(48, 47, 47);
 }
 .about{
   margin-left: 1rem;
-  
+  cursor:pointer;
 }
 .userName {
   display: flex;
@@ -191,7 +199,7 @@ margin: 2rem 0;
   border-radius: 5rem;
   border: 0px;
   box-shadow: 0rem 0rem 0.3rem 0.1rem;
-
+  cursor:pointer;
 }
 .else-block {
   background: white;

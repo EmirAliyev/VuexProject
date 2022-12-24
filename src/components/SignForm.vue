@@ -28,7 +28,7 @@
       />
       <p class="warnPass" v-if="warnMode2">От 5 до 16 символов</p>
     </div>
-    <div class="form-group" v-if="$store.getters.dialogMode === false">
+    <div class="form-group" v-if="dialogMode === false">
       <label for="userName">Имя</label>
       <input
         ref="myName"
@@ -42,7 +42,7 @@
       />
       <p class="warnName" v-if="warnModeName">От 2 до 16 символов</p>
     </div>
-    <div class="form-group" v-if="$store.getters.dialogMode === false">
+    <div class="form-group" v-if="dialogMode === false">
       <label for="surName">Фамилия</label>
       <input
         ref="mySurname"
@@ -56,7 +56,7 @@
       />
       <p class="warnSurname" v-if="warnModeSurname">От 2 до 16 символов</p>
     </div>
-    <div class="form-group" v-if="$store.getters.dialogMode === false">
+    <div class="form-group" v-if="dialogMode === false">
       <label for="age">Возраст</label>
       <input
         ref="myAge"
@@ -70,7 +70,7 @@
       />
       <p class="warnAge" v-if="warnModeAge">От 6 до 120 лет</p>
     </div>
-    <div class="form-group" v-if="$store.getters.dialogMode === false">
+    <div class="form-group" v-if="dialogMode === false">
       <label for="country">Страна</label>
       <input
         ref="myCountry"
@@ -84,7 +84,7 @@
       />
       <p class="warnCountry" v-if="warnModeCountry">От 2 до 21 символов</p>
     </div>
-    <div class="form-group" v-if="$store.getters.dialogMode === false">
+    <div class="form-group" v-if="dialogMode === false">
       <label for="city">Город</label>
       <input
         ref="myCity"
@@ -98,7 +98,7 @@
       />
       <p class="warnCity" v-if="warnModeCity">От 2 до 21 символов</p>
     </div>
-    <div class="form-group" v-if="$store.getters.dialogMode === false">
+    <div class="form-group" v-if="dialogMode === false">
       <label for="study">Универ/Школа</label>
       <input
         ref="myStudy"
@@ -116,6 +116,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 export default {
   name: "SignForm",
   data() {
@@ -236,6 +237,9 @@ export default {
       }
     },
   },
+  computed:{
+    ...mapGetters(['dialogMode']),
+  }
 };
 </script>
 

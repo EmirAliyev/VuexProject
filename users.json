@@ -13,8 +13,8 @@
         "country": "Азербайджан",
         "city": "Баку"
       },
-      "study": "ADDA (АГМА)",
-      "avatar": "https://sun9-17.userapi.com/impg/D4VzfZOB7_ChcsoQ1PX_w7eSjNgjKfz0NR9yaA/V9yPbmlsGK8.jpg?size=897x1080&quality=96&sign=00b323beb19a1952fb614be17b1a87ec&type=album",
+      "study": "ADNSU (ADNA, бывш. АГНА, АзИНЕФТЕХИМ)",
+      "avatar": "https://sun9-39.userapi.com/impg/-RoIh1-dC6uxbRFqlb5Iq8QTDJCjdrfaq8X4QQ/yV49YX2m5mk.jpg?size=823x1029&quality=95&sign=d16960388127bc1f858c353146d61f14&type=album",
       "photo": [
         "https://sun9-39.userapi.com/impg/-RoIh1-dC6uxbRFqlb5Iq8QTDJCjdrfaq8X4QQ/yV49YX2m5mk.jpg?size=823x1029&quality=95&sign=d16960388127bc1f858c353146d61f14&type=album",
         "https://sun9-5.userapi.com/impg/We_wVN7b_fLdBu7gb1c7j0MNSFyKKs3tt53joA/JmnCVgHuGgY.jpg?size=683x683&quality=95&sign=339e6f2370b185e963b45d915f1b6cec&type=album",
@@ -50,6 +50,30 @@
       "mainPhotoId": 2,
       "friends": [
         [
+          "Тимур Абдулмуталибов",
+          "https://sun9-83.userapi.com/impg/n_hnM9pUXdprF-WcJqRm21x8P4IPnS9B_LUZZQ/WdgPrFwc4Ew.jpg?size=1280x1280&quality=96&sign=b7f45a8126b648a3d2f6dbb401e927fd&type=album",
+          "4",
+          "TimurA"
+        ],
+        [
+          "Иван Левша",
+          "https://sun9-24.userapi.com/impg/JwqinMEfaDjQoZwj3Gh0E9Q06xu_n5854jAkIg/6oVq0Fb4HOE.jpg?size=927x1080&quality=95&sign=939744b2e16b0f40bee2dffb3b4c7a29&type=album",
+          "3",
+          "IvanLevsa"
+        ],
+        [
+          "Сулейман Калимулин",
+          "https://sun9-45.userapi.com/impg/hS_aASGBC27BzXnXcMf4y1k7tjO2kTNa294vaQ/-lBkjh3U2LY.jpg?size=852x1080&quality=95&sign=99bccb9422a29af34ddb10c7c7926df7&type=album",
+          "2",
+          "Sulik"
+        ],
+        [
+          "Эдуард Коновалов",
+          "https://sun9-west.userapi.com/sun9-14/s/v1/ig2/ECFhrGnOP8V9tmGIUEAcdcabqzKJ8OWNJx3uQXUwXE1Y8DZN50PH5fxGovWsbVIIGA7ZuNrtJERsbkfnq7jGXcIo.jpg?size=810x1080&quality=96&type=album",
+          "6",
+          "killer2016"
+        ],
+        [
           "Рома Ткаченко",
           "https://sun9-north.userapi.com/sun9-85/s/v1/ig2/qpCDcAYHxSrKho6pY0So-eV9txpGszMd_R9EgaW3WvJyy94ZHUlyShhV3SQIYJ-AQ4ZA_gsElF08TYZmNth19cE2.jpg?size=720x1080&quality=95&type=album",
           "8",
@@ -74,22 +98,10 @@
           "Negrila"
         ],
         [
-          "Эдуард Коновалов",
-          "https://sun9-west.userapi.com/sun9-14/s/v1/ig2/ECFhrGnOP8V9tmGIUEAcdcabqzKJ8OWNJx3uQXUwXE1Y8DZN50PH5fxGovWsbVIIGA7ZuNrtJERsbkfnq7jGXcIo.jpg?size=810x1080&quality=96&type=album",
-          "6",
-          "killer2016"
-        ],
-        [
           "Габиб Габибулаев",
           "https://sun9-9.userapi.com/impg/TXThJKih6c8HnYLm8mDu_nISkfGxfJofZnJwJQ/czcEV6CvZKo.jpg?size=1080x1080&quality=96&sign=75716dc7fde2eaeb077e507fe8b8cf1f&type=album",
           "5",
           "Khabib"
-        ],
-        [
-          "Иван Левша",
-          "https://sun9-24.userapi.com/impg/JwqinMEfaDjQoZwj3Gh0E9Q06xu_n5854jAkIg/6oVq0Fb4HOE.jpg?size=927x1080&quality=95&sign=939744b2e16b0f40bee2dffb3b4c7a29&type=album",
-          "3",
-          "IvanLevsa"
         ]
       ]
     },
@@ -100,7 +112,7 @@
       "token": "5lsm213yndvaiap43w6j2b",
       "password": "fds1234",
       "description": {
-        "name": "Сулейман",
+        "name": "Сулик",
         "surname": "Калимулин",
         "age": "22",
         "country": "Азербайджан",
@@ -168,7 +180,7 @@
           21
         ],
         [
-          14
+          13
         ],
         [
           35
@@ -176,9 +188,7 @@
       ],
       "likedBy": [
         [],
-        [
-          1
-        ],
+        [],
         []
       ],
       "comments": [
@@ -212,7 +222,7 @@
       ],
       "likes": [
         [
-          12
+          11
         ],
         [
           21
@@ -225,9 +235,7 @@
         ]
       ],
       "likedBy": [
-        [
-          1
-        ],
+        [],
         [],
         [],
         []

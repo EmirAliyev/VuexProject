@@ -30,34 +30,34 @@ export default new Vuex.Store({
     userInfo:[],
   },
   mutations: {
-    changeSignMode(state) {
+    changeSignMode_f(state) {
       state.signShow = !state.signShow;
     },
-    changeMode(state) {
+    changeMode_f(state) {
       state.dialogMode = !state.dialogMode;
     },
     setProducts(state, response) {
       state.users = response;
     },
-    changeAuth(state) {
+    changeAuth_f(state) {
       state.auth = true;
     },
-    changeUserShow(state) {
+    changeUserShow_f(state) {
       state.userShow = !state.userShow;
     },
-    changeAllPhotos(state) {
+    changeAllPhotos_f(state) {
       state.AllPhotos = !state.AllPhotos;
     },
-    IncreasePhoto(state) {
+    IncreasePhoto_f(state) {
       state.IncreasePhoto = !state.IncreasePhoto;
     },
-    currentUser(state, user) {
+    currentUser_f(state, user) {
       state.currentUser = user;
     },
-    editMode(state) {
+    editMode_f(state) {
       state.editMode = !state.editMode;
     },
-    visitedUser(state, user) {
+    visitedUser_f(state, user) {
       state.login = user.login;
       state.pass = user.password;
       state.name = user.description.name;
@@ -67,7 +67,7 @@ export default new Vuex.Store({
       state.country = user.description.country;
       state.study = user.study;
     },
-    cleanInputData(state) {
+    cleanInputData_f(state) {
       state.login = "";
       state.pass = "";
       state.name = "";
@@ -77,10 +77,10 @@ export default new Vuex.Store({
       state.country = "";
       state.city = "";
     },
-    avatarMode(state){
+    avatarMode_f(state){
       state.avatarMode=!state.avatarMode
     },
-    friendsMode(state){
+    friendsMode_f(state){
       state.friendsMode=!state.friendsMode
     },
     setLenta(state,response){
@@ -94,7 +94,7 @@ export default new Vuex.Store({
         }
       })
     },
-    userInfo(state,data){
+    userInfo_f(state,data){
       state.userInfo=data
     }
   },

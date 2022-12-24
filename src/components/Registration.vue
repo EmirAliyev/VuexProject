@@ -1,26 +1,20 @@
 <template>
-  <div class="dialogMain" @click="$store.commit('changeSignMode')">
+  <div class="dialogMain" @click="changeSignMode_f">
     <div class="dialogContent" @click.stop>
-      <div class="modal_Desc" v-if="$store.getters.editMode == false">
-        Регистрация
-      </div>
+      <div class="modal_Desc" v-if="editMode == false">Регистрация</div>
       <div class="modal_Desc" v-else>Редактировать</div>
       <hr />
       <form>
         <SignForm></SignForm>
         <div class="upperFunc">
-          <p
-            class="registr"
-            @click="changeMode"
-            v-if="$store.getters.editMode == false"
-          >
+          <p class="registr" @click="changeMode" v-if="editMode == false">
             Авторизация
           </p>
           <button type="button" class="btn_del btn_animation" @click="cancel">
             Отмена
           </button>
           <button
-            v-if="$store.getters.editMode == false"
+            v-if="editMode == false"
             type="button"
             class="btn_go btn_animation"
             @click="createNewUser"
@@ -42,6 +36,7 @@
 </template>
 
 <script>
+import { mapActions, mapGetters, mapMutations } from "vuex";
 import axios from "axios";
 import SignForm from "./SignForm.vue";
 export default {
@@ -52,58 +47,93 @@ export default {
     getData: Object,
   },
   methods: {
+    ...mapMutations([
+      "changeSignMode_f",
+      "changeMode_f",
+      "editMode_f",
+      "cleanInputData_f",
+    ]),
+    ...mapActions(["loadData"]),
     changeMode() {
-      this.$store.commit("changeMode");
+      this.changeMode_f();
     },
 
     async editUser() {
+      let checkLogin = this.users.filter((user) => {
+        return user.login == this.login;
+      });
       if (
-        ((3 < this.$store.getters.login.length) && ( this.$store.getters.login.length < 17)) &&
-        ((4 < this.$store.getters.pass.length) && (this.$store.getters.pass.length<17)) &&
-        ((1 < this.$store.getters.name.length) && (this.$store.getters.name.length<17)) &&
-        ((1 < this.$store.getters.surname.length) && (this.$store.getters.surname.length<17)) &&
-        ((1 < this.$store.getters.country.length) && (this.$store.getters.country.length < 22)) &&
-        ((1 < this.$store.getters.city.length) && ( this.$store.getters.city.length<22)) &&
-        ((4 < this.$store.getters.study.length) && (this.$store.getters.study.length <51)) &&
-        ((5 < this.$store.getters.age) && (this.$store.getters.age<121))
+        3 < this.login.length &&
+        this.login.length < 17 &&
+        4 < this.pass.length &&
+        this.pass.length < 17 &&
+        1 < this.name.length &&
+        this.name.length < 17 &&
+        1 < this.surname.length &&
+        this.surname.length < 17 &&
+        1 < this.country.length &&
+        this.country.length < 22 &&
+        1 < this.city.length &&
+        this.city.length < 22 &&
+        4 < this.study.length &&
+        this.study.length < 51 &&
+        5 < this.age &&
+        this.age < 121 &&
+        (checkLogin.length == 0 || this.login == this.currentUser.login)
       ) {
         await axios.patch(`http://localhost:3000/allUsers/${this.getData.id}`, {
-          login: this.$store.getters.login,
-          password: this.$store.getters.pass,
+          login: this.login,
+          password: this.pass,
           description: {
-            name: this.$store.getters.name,
-            surname: this.$store.getters.surname,
-            age: this.$store.getters.age,
-            country: this.$store.getters.country,
-            city: this.$store.getters.city,
+            name: this.name,
+            surname: this.surname,
+            age: this.age,
+            country: this.country,
+            city: this.city,
           },
-          study: this.$store.getters.study,
+          study: this.study,
         });
+        //На всякий случай сбрасываю данные, чтобы не возникли помехи
+        localStorage.clear();
+        this.cleanInputData_f();
+        this.$store.state.currentUser = null;
+        this.$store.state.signShow = false;
+        this.$store.state.dialogMode = false;
+        this.$store.state.auth = false;
+        this.$store.state.editMode = false;
+        this.$router.push({ name: "home" });
+        this.loadData();
+        alert(
+          "Данные успешно обновлены. Пожалуйста пройдите авторизацию заново."
+        );
+      } else {
+        alert(
+          "Данный логин уже существует в базе данных. Также проверьте нет ли у вас красных полей."
+        );
       }
-      alert(
-        "Данные успешно обновлены. Пожалуйста пройдите авторизацию заново."
-      );
-      //На всякий случай сбрасываю данные, чтобы не возникли помехи
-      localStorage.clear();
-      this.$store.commit("cleanInputData");
-      this.$router.push({ name: "home" });
-      this.$store.dispatch("loadData");
-      this.$store.state.signShow = false;
-      this.$store.state.dialogMode = false;
-      this.$store.state.editMode = false;
-      this.$store.state.currentUser == null;
-      //В противном случае события происходят на главной странице
     },
-    async createNewUser() {  
+    async createNewUser() {
+      let checkLogin = this.users.filter((user) => {
+        return user.login == this.login;
+      });
       if (
-        ((3 < this.$store.getters.login.length) && ( this.$store.getters.login.length < 17)) &&
-        ((4 < this.$store.getters.pass.length) && (this.$store.getters.pass.length<17)) &&
-        ((1 < this.$store.getters.name.length) && (this.$store.getters.name.length<17)) &&
-        ((1 < this.$store.getters.surname.length) && (this.$store.getters.surname.length<17)) &&
-        ((1 < this.$store.getters.country.length) && (this.$store.getters.country.length < 22)) &&
-        ((1 < this.$store.getters.city.length) && ( this.$store.getters.city.length<22)) &&
-        ((4 < this.$store.getters.study.length) && (this.$store.getters.study.length <51)) &&
-        ((5 < this.$store.getters.age) && (this.$store.getters.age<121))
+        3 < this.login.length &&
+        this.login.length < 17 &&
+        4 < this.pass.length &&
+        this.pass.length < 17 &&
+        1 < this.name.length &&
+        this.name.length < 17 &&
+        1 < this.surname.length &&
+        this.surname.length < 17 &&
+        1 < this.country.length &&
+        this.country.length < 22 &&
+        1 < this.city.length &&
+        this.city.length < 22 &&
+        4 < this.study.length &&
+        this.study.length < 51 &&
+        5 < this.age &&
+        this.age < 121 &&
+        checkLogin.length == 0
       ) {
         //Генератор токена для пользователя
         let rand = function () {
@@ -115,41 +145,58 @@ export default {
         let jwt = token();
         await axios.post("http://localhost:3000/allUsers/", {
           role: "user",
-          login: this.$store.getters.login,
-          password: this.$store.getters.pass,
+          login: this.login,
+          password: this.pass,
           token: jwt,
           description: {
-            name: this.$store.getters.name,
-            surname: this.$store.getters.surname,
-            age: this.$store.getters.age,
-            country: this.$store.getters.country,
-            city: this.$store.getters.city,
+            name: this.name,
+            surname: this.surname,
+            age: this.age,
+            country: this.country,
+            city: this.city,
           },
-          study: this.$store.getters.study,
+          study: this.study,
           avatar: "https://cdn-icons-png.flaticon.com/512/1177/1177443.png",
           likedBy: [],
           likes: [],
-          comments:[],
-          friends:[],
-          photo:[],
+          comments: [],
+          friends: [],
+          photo: [],
         });
         alert("Пользователь успешно зарегестрирован.");
         window.location.reload();
       } else {
-        alert("Исправьте красные поля.");
+        alert(
+          "Данный логин уже существует в базе данных. Также проверьте нет ли у вас красных полей."
+        );
       }
     },
 
     cancel() {
-      if (this.$store.getters.editMode) {
-        this.$store.commit("editMode");
+      if (this.editMode) {
+        this.editMode_f();
       } else {
-        this.$store.commit("changeSignMode");
+        this.changeSignMode_f();
       }
     },
   },
   data() {
     return {};
+  },
+  computed: {
+    ...mapGetters([
+      "editMode",
+      "users",
+      "login",
+      "pass",
+      "name",
+      "surname",
+      "country",
+      "city",
+      "study",
+      "age",
+      'currentUser'
+    ]),
   },
 };
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <div class="dialogMain" @click="$store.commit('changeSignMode')" @keyup.enter="goToLenta">
+  <div class="dialogMain" @click="changeSignMode_f" @keyup.enter="goToLenta">
     <div class="dialogContent" @click.stop>
       <div class="modal_Desc">Войти</div>
       <hr />
@@ -10,7 +10,7 @@
           <button
             type="button"
             class="btn_del btn_animation"
-            @click="$store.commit('changeSignMode')"
+            @click="changeSignMode_f"
           >
             Отмена
           </button>
@@ -25,32 +25,33 @@
 
 <script>
 import SignForm from "./SignForm.vue";
+import { mapMutations, mapGetters } from "vuex";
 export default {
   components: {
     SignForm,
   },
   data() {
     return {
-      allUsers: this.$store.getters.users,
       access: false,
     };
   },
   methods: {
+    ...mapMutations(['changeSignMode_f','changeMode_f','currentUser_f','changeAuth_f']),
     changeMode() {
-      this.$store.commit("changeMode");
+      this.changeMode_f()
     },
     goToLenta() {
-      this.allUsers.find((user) => {
+      this.users.find((user) => {
         if (
-          user.login == this.$store.getters.login &&
-          user.password == this.$store.getters.pass
+          user.login == this.login &&
+          user.password == this.pass
         ) {
           this.$router.push({ name: "lenta" });
           this.access = true;
-          this.$store.commit("changeAuth");
+          this.changeAuth_f()
           localStorage.setItem("token",user.token);
           localStorage.setItem('user',JSON.stringify(user))
-          this.$store.commit('currentUser',user)
+          this.currentUser_f(user)
         }
       });
       if (this.access == false) {
@@ -58,6 +59,9 @@ export default {
       }
     },
   },
+  computed:{
+    ...mapGetters(['users','login','pass']),
+  }
 };
 </script>
 
